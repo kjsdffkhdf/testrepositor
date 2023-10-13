@@ -14,6 +14,7 @@ public class Hardware {
     public DcMotor demoWheel3;
     public DcMotor demoWheel4;
     public Servo demoServo1;
+    //servos are positions
     public BNO055IMU gyro;
     public RevColorSensorV3 demoColorSensor;
 
@@ -47,18 +48,18 @@ public class Hardware {
             demoWheel2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             demoWheel2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             demoWheel2.setPower(0);
-        } catch (Exception p_exception){
-        demoWheel2 = null;
-    }
-         try {
-        demoWheel3 = hwMap.get(DcMotor.class, "demoWheel3");
-        demoWheel3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        demoWheel3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        demoWheel3.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        demoWheel3.setPower(0);
-         } catch(Exception p_exception) {
-        demoWheel3 = null;
-    }
+        } catch (Exception p_exception) {
+            demoWheel2 = null;
+        }
+        try {
+            demoWheel3 = hwMap.get(DcMotor.class, "demoWheel3");
+            demoWheel3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            demoWheel3.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            demoWheel3.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            demoWheel3.setPower(0);
+        } catch (Exception p_exception) {
+            demoWheel3 = null;
+        }
         try {
             demoWheel4 = hwMap.get(DcMotor.class, "demoWheel4");
             demoWheel4.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -70,27 +71,27 @@ public class Hardware {
         }
 
         try {
-            demoServo1=hwMap.get(Servo.class, "demoServo1")
-        } catch (Exception p_exception){
-            demoServo1=null;
+            demoServo1 = hwMap.get(Servo.class, "demoServo1");
+        } catch (Exception p_exception) {
+            demoServo1 = null;
         }
         try {
-            demoColorSensor=hwMap.get(RevColorSensorV3.class "demoColorSensor")
-        }catch (Exception p_exception){
-            demoColorSensor=null;
+            demoColorSensor = hwMap.get(RevColorSensorV3.class, "demoColorSensor");
+        } catch (Exception p_exception) {
+            demoColorSensor = null;
         }
 
         try {
-            gyro=hwMap.get(BNO055IMU.class, "gyro");
-            BNO055IMU.Parameters parameters=new BNO055IMU.Parameters();
-            parameters.angleUnit=BNO055IMU.AngleUnit.DEGREES;
-            parameters.accelUnit=BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-            parameters.loggingEnabled=true;
-            parameters.loggingTag="gyro";
-            parameters.accelerationIntegrationAlgorithm=new JustLoggingAccelerationIntegrator()
-                    gyro.initialize(parameters);
-        } catch(Exception p_exception) {
-            gyro=null;
+            gyro = hwMap.get(BNO055IMU.class, "gyro");
+            BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+            parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+            parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+            parameters.loggingEnabled = true;
+            parameters.loggingTag = "gyro";
+            parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+            gyro.initialize(parameters);
+        } catch (Exception p_exception) {
+            gyro = null;
         }
 
 
@@ -109,6 +110,8 @@ public class Hardware {
         if (demoWheel4 != null) {
             demoWheel4.setPower(Range.clip(wheelDemo4, -maxSpeed, maxSpeed));
         }
+
+
     }
-    //servos are positions
+
 }
